@@ -1,0 +1,135 @@
+<html>
+    <head>
+        <title>Catch the Dot</title>
+        <style>
+            body{
+                background-color: black;
+            }
+            #start{
+                display: block;
+                border-radius: 50%;
+                background-color: chartreuse;
+                position: absolute;
+                top: 40%;
+                font-size: 30px;
+                left: 47%;
+                width: 130px;
+                height: 130px;
+                cursor: pointer;
+            }
+            #start:hover{
+                box-shadow: 1px 1px 1px 1px  rgb(107, 47, 107);
+                background-color: magenta;
+                color: white;
+            }
+            #button{
+                display: none;
+                cursor: pointer;
+                border-radius: 50%;
+                background-color: white;
+                width: 60px;
+                height: 60px;
+                position: absolute;
+                top: 40%;
+                left: 50%;
+            }
+            #sco{
+                color: white;
+                display: inline;
+                position:absolute;
+                left: 15%;
+            }
+            #highsco{
+                color: white;
+                display: inline;
+                position:absolute;
+                left: 65%;
+            }
+            #t{
+                color: white;
+                display: none;
+                position: absolute;
+                top: 85%;
+                left: 46%;
+            }
+            #gameover{
+                display: none;
+                position: absolute;
+                top: 35%;
+                left: 45%;
+            }
+            #over{
+                padding-left: 10px;
+                color: red;
+                font-size: 30px;
+            }
+            #again{
+                background-color: yellow;
+                cursor: pointer;
+                border-radius: 20px;
+                padding: 10px;
+                font-size: 30px;
+            }
+            #again:hover{
+                background-color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <h1 id="sco">Score: <spam id="score">0</spam></h1>
+            <h1 id="highsco">Highest Score: <spam id="highscore">0</spam></h1>
+        </div>
+        <button id="button" onclick="move()"></button>
+        <button id="start" onclick="start()">Start</button>
+        <h1 id="t">Time: 0:<spam id="time">30</spam></h1>        
+        <div id="gameover">
+            <p id="over">Time Over</p>
+            <button id="again" onclick="playagain()">Play Again</button>
+        </div>
+    </body>
+    <script>
+        c=0;
+        sta=0;
+        let hs=localStorage.getItem('catchball')||0;
+        document.getElementById('highscore').innerHTML=hs;
+        sec=31;
+        function start(){
+            document.getElementById('start').style.display="none";
+            document.getElementById('button').style.display="block";
+            document.getElementById('t').style.display="block";
+            sta=1;
+        }
+        function move(){
+            t=Math.floor(Math.random()*90)
+            l=Math.floor(Math.random()*95)
+            wh=Math.floor(Math.random()*(80-40))+40;
+            document.getElementById('button').style.width=wh;
+            document.getElementById('button').style.height=wh;
+            document.getElementById('button').style.top=t+'%';
+            document.getElementById('button').style.left=l+'%';
+            c+=1
+            document.getElementById('score').innerHTML=c;
+            if(c>hs){
+                localStorage.setItem('catchball',c);
+                document.getElementById('highscore').innerHTML=c;
+            }
+        }
+        function playagain(){
+            location.reload();
+        }
+        function time(){
+            if(sta<=0){
+                return;
+            }
+            if(sec<=0){
+                document.getElementById('button').style.display="none";
+                document.getElementById('gameover').style.display="block";
+                document.getElementById('t').style.display="";
+            }
+            sec-=1;
+            document.getElementById('time').innerHTML=sec;
+        }
+        setInterval(time,1000);
+    </script>
+</html>
