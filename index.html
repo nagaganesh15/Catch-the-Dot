@@ -76,15 +76,18 @@
                 background-color: white;
             }
             @media only screen and (max-width: 600px){
-                #button,#start,#gameover,#t{
-                    left: 35%;
+                #button,#start,#t{
+                    left: 32%;
+                }
+                #gameover{
+                    left: 30%;
                 }
                 #sco{
-                    left:10%;
+                    left:8%;
                     font-size: 20px;
                 }
                 #highsco{
-                    left: 55%;
+                    left: 45%;
                     font-size: 20px;
 
                 }
@@ -119,7 +122,7 @@
         }
         function move(){
             t=Math.floor(Math.random()*80)
-            l=Math.floor(Math.random()*95)
+            l=Math.floor(Math.random()*87)
             wh=Math.floor(Math.random()*(80-40))+40;
             document.getElementById('button').style.width=wh;
             document.getElementById('button').style.height=wh;
